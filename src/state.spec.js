@@ -23,4 +23,11 @@ describe('Testing Zustand state', () => {
     state.getState().updateLetterColor(0);
     expect(Color.Grey.is(state.getState().guesses[0])).toBe(true);
   });
+  test('It should remove letters with deleteLetter()', () => {
+    state.getState().guesses = [Color.Green('a'), Color.Grey('b'), Color.Yellow('c')];
+    state.getState().deleteLetter();
+    expect(state.getState().guesses.length).toBe(2);
+    expect(Color.Green.is(state.getState().guesses[0])).toBe(true);
+    expect(Color.Grey.is(state.getState().guesses[1])).toBe(true);
+  });
 });

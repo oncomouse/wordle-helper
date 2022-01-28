@@ -1,6 +1,6 @@
 import create from 'zustand';
-import { adjust, evolve } from 'ramda';
-import Color from './types/Color';
+import { adjust, dropLast, evolve } from 'ramda';
+// import Color from './types/Color';
 
 const useStore = create((set) => ({
   guesses: [],
@@ -8,8 +8,12 @@ const useStore = create((set) => ({
   resetState: () => set({ guesses: [], history: [] }),
   newGuess: () => set({ guesses: [] }),
   addLetter: () => set({}),
-  deleteLetter: () => set({}),
-  pressEnter: () => set({}),
+  deleteLetter: () =>
+    set(
+      evolve({
+        guesses: dropLast(1),
+      })
+    ),
   updateLetterColor: (i) =>
     set(
       evolve({
