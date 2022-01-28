@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import useStore from '../state';
+import useStore from '../features/store';
 
 const LetterButton = (props) => {
-  const addLetter = useStore.getStore().addLetter;
-  return <button onClick={addLetter(props.letter)}>{props.letter}</button>;
+  const addLetter = useStore((state) => state.addLetter);
+  return <button onClick={() => addLetter(props.letter)}>{props.letter}</button>;
 };
 LetterButton.propTypes = {
   letter: PropTypes.string.isRequired,
