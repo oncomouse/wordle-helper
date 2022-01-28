@@ -30,4 +30,41 @@ describe('Testing Zustand state', () => {
     expect(Color.Green.is(state.getState().guesses[0])).toBe(true);
     expect(Color.Grey.is(state.getState().guesses[1])).toBe(true);
   });
+  test('It should add a letter using addLetter() when there are fewer than 5 in guess', () => {
+    state.getState().addLetter('a');
+    expect(state.getState().guesses.length).toBe(1);
+    expect(Color.Grey.is(state.getState().guesses[0])).toBe(true);
+    expect(state.getState().guesses[0].x).toBe('a');
+  });
+  test('It should add a lowercase letter using addLetter() when there are fewer than 5 in guess', () => {
+    state.getState().addLetter('A');
+    expect(state.getState().guesses[0].x).toBe('a');
+  });
+  test('It should not add a letter using addLetter() when there are 5 in guess', () => {
+    state.getState().addLetter('a');
+    state.getState().addLetter('b');
+    state.getState().addLetter('c');
+    state.getState().addLetter('d');
+    state.getState().addLetter('e');
+    state.getState().updateLetterColor(4);
+    state.getState().addLetter('a');
+    expect(state.getState().guesses.length).toBe(5);
+    expect(state.getState().guesses[4].x).toBe('e');
+    expect(Color.Yellow.is(state.getState().guesses[4])).toBe(true);
+  });
+  test('It should add current guess to history and reset guest with newGuess()', () => {
+    state.getState().addLetter('a');
+    state.getState().addLetter('b');
+    state.getState().addLetter('c');
+    state.getState().newGuess();
+    expect(state.getState().history.length).toBe(1);
+    expect(state.getState().history[0].length).toBe(3);
+    expect(state.getState().history[0][0].x).toBe('a');
+    state.getState().addLetter('d');
+    state.getState().addLetter('e');
+    state.getState().newGuess();
+    expect(state.getState().history.length).toBe(2);
+    expect(state.getState().history[1].length).toBe(2);
+    expect(state.getState().history[1][0].x).toBe('d');
+  });
 });
