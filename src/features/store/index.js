@@ -1,6 +1,6 @@
 import create from 'zustand';
 import { __, adjust, append, dropLast, evolve, identity, ifElse, length, lt, pipe, toLower } from 'ramda';
-import Color from './types/Color';
+import Color from '../../types/Color';
 
 const useStore = create((set) => ({
   guesses: [],
