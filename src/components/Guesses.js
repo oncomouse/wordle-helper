@@ -4,7 +4,7 @@ import { css, jsx } from '@emotion/react';
 import propTypes from 'prop-types';
 import { always } from 'ramda';
 import useStore from '../features/store';
-import { propType as ColorType } from '../types/Color';
+import { ColorType } from '../types/Color';
 
 const Guesses = () => {
   const [guesses, history] = useStore((state) => [state.guesses, state.history]);

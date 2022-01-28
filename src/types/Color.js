@@ -20,7 +20,7 @@ Color.prototype.update = function () {
   });
 };
 
-export const propType = function (propValue, key, componentName, location, propFullName) {
+export const ColorType = function (propValue, key, componentName, location, propFullName) {
   if (!Color.is(propValue[key])) {
     return new Error(
       'Invalid prop `' + propFullName + '` supplied to' + ' `' + componentName + '`. Validation failed.'
