@@ -1,3 +1,6 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react';
 import propTypes from 'prop-types';
 import { always } from 'ramda';
 import useStore from '../features/store';

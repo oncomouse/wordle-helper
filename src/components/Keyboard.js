@@ -1,3 +1,6 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react';
 import LetterButton from './LetterButton';
 
 const Keyboard = () => {
