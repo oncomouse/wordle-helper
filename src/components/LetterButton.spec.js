@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
+import render from './test-render';
 import LetterButton from './LetterButton';
 import store from '../features/store';
 import Color from '../types/Color';
