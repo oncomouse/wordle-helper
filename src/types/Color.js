@@ -7,6 +7,10 @@ const Color = taggedSum('Color', {
   White: [],
 });
 
+Color.new = function (x) {
+  return Color.Grey(x);
+};
+
 Color.prototype.update = function () {
   return this.cata({
     Grey: (x) => Color.Yellow(x),
