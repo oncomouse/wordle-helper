@@ -1,8 +1,12 @@
 import store from './index';
 import Color from '../../types/Color';
+import words from '../../../public/words.json';
 
 afterEach(() => {
   store.getState().resetState();
+});
+beforeEach(() => {
+  fetch.resetMocks();
 });
 describe('Testing Zustand state', () => {
   test('It should reset the state with resetState()', () => {
@@ -70,6 +74,7 @@ describe('Testing Zustand state', () => {
 });
 describe('Test getWords and its ability to make search queries', () => {
   test('It should match with an empty history', async () => {
+    fetch.mockResponseOnce(JSON.stringify(words));
     store.getState().addLetter('e');
     store.getState().addLetter('y');
     store.getState().addLetter('v');
@@ -84,6 +89,7 @@ describe('Test getWords and its ability to make search queries', () => {
     expect(store.getState().words).toStrictEqual(results);
   });
   test('It should update words based on existing word bank', async () => {
+    fetch.mockResponseOnce(JSON.stringify(words));
     store.getState().guesses = [Color.Green('v'), Color.White, Color.White, Color.White, Color.White];
     store.getState().words = ['veery', 'every'];
     const results = ['veery'];
