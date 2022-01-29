@@ -68,3 +68,26 @@ describe('Testing Zustand state', () => {
     expect(store.getState().history[1][0].x).toBe('d');
   });
 });
+describe('Test getWords and its ability to make search queries', () => {
+  test('It should match with an empty history', async () => {
+    store.getState().addLetter('e');
+    store.getState().addLetter('y');
+    store.getState().addLetter('v');
+    store.getState().addLetter('r');
+    store.getState().addLetter('n');
+    store.getState().updateLetterColor(0);
+    store.getState().updateLetterColor(1);
+    store.getState().updateLetterColor(2);
+    store.getState().updateLetterColor(3);
+    const results = ['every', 'veery']; // Block nervy with the grey
+    await store.getState().getWords();
+    expect(store.getState().words).toStrictEqual(results);
+  });
+  test('It should update words based on existing word bank', async () => {
+    store.getState().guesses = [Color.Green('v'), Color.White, Color.White, Color.White, Color.White];
+    store.getState().words = ['veery', 'every'];
+    const results = ['veery'];
+    await store.getState().getWords();
+    expect(store.getState().words).toStrictEqual(results);
+  });
+});
