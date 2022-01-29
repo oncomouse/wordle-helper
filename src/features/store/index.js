@@ -11,10 +11,10 @@ const useStore = create((set, get) => ({
   words: [],
   resetState: () => set({ guesses: [], history: [], words: [] }),
   newGuess: () =>
-    set((state) => {
-      state.history = append(state.guesses, state.history);
-      state.guesses = [];
-    }),
+    set((state) => ({
+      history: append(state.guesses, state.history),
+      guesses: [],
+    })),
   addLetter: (x) =>
     set(
       evolve({

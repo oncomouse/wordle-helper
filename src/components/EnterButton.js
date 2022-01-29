@@ -1,28 +1,25 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, useTheme, jsx } from '@emotion/react';
-import PropTypes from 'prop-types';
 import useStore from '../features/store';
 
-const LetterButton = (props) => {
-  const addLetter = useStore((state) => state.addLetter);
+const EnterButton = () => {
+  const newGuess = useStore((state) => state.newGuess);
   const theme = useTheme();
   return (
     <button
       css={css`
+        line-height: 1;
         margin: ${theme.button.margin}rem;
-        width: ${theme.button.width}rem;
+        width: ${theme.button.width * 1.5}rem;
         font-size: ${theme.button.font.size}rem;
         height: ${theme.button.height}rem;
       `}
-      onClick={() => addLetter(props.letter)}
+      onClick={() => newGuess()}
     >
-      {props.letter}
+      Enter
     </button>
   );
 };
-LetterButton.propTypes = {
-  letter: PropTypes.string.isRequired,
-};
 
-export default LetterButton;
+export default EnterButton;

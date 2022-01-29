@@ -2,8 +2,9 @@ const theme = {
   button: {
     margin: 0.1,
     width: 3.5,
+    height: 2.75,
     font: {
-      size: 2.5,
+      size: 1.25,
     },
   },
 };

@@ -20,6 +20,15 @@ Color.prototype.update = function () {
   });
 };
 
+Color.prototype.get = function () {
+  return this.cata({
+    Grey: (x) => x,
+    Yellow: (x) => x,
+    Green: (x) => x,
+    White: () => '',
+  });
+};
+
 export const ColorType = function (propValue, key, componentName, location, propFullName) {
   if (!Color.is(propValue[key])) {
     return new Error(

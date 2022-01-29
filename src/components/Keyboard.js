@@ -2,6 +2,8 @@
 /** @jsx jsx */
 import { css, jsx, useTheme } from '@emotion/react';
 import LetterButton from './LetterButton';
+import EnterButton from './EnterButton';
+import BackspaceButton from './BackspaceButton';
 
 const Keyboard = () => {
   const theme = useTheme();
@@ -35,6 +37,7 @@ const Keyboard = () => {
         <LetterButton letter="l" />
       </div>
       <div>
+        <EnterButton />
         <LetterButton letter="z" />
         <LetterButton letter="x" />
         <LetterButton letter="c" />
@@ -42,6 +45,7 @@ const Keyboard = () => {
         <LetterButton letter="b" />
         <LetterButton letter="n" />
         <LetterButton letter="m" />
+        <BackspaceButton />
       </div>
     </div>
   );
