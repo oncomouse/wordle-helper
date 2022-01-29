@@ -4,7 +4,7 @@ import { css, useTheme, jsx } from '@emotion/react';
 import useStore from '../features/store';
 
 const EnterButton = () => {
-  const newGuess = useStore((state) => state.newGuess);
+  const getWords = useStore((state) => state.getWords);
   const theme = useTheme();
   return (
     <button
@@ -15,7 +15,7 @@ const EnterButton = () => {
         font-size: ${theme.button.font.size}rem;
         height: ${theme.button.height}rem;
       `}
-      onClick={() => newGuess()}
+      onClick={() => getWords()}
     >
       Enter
     </button>

@@ -9,7 +9,11 @@ import Color, { ColorType } from '../types/Color';
 const Guesses = () => {
   const [guesses, history] = useStore((state) => [state.guesses, state.history]);
   return (
-    <div>
+    <div
+      css={css`
+        display: block;
+      `}
+    >
       {history.reverse().map((guess, i) => (
         <Guess key={i} guess={guess} />
       ))}

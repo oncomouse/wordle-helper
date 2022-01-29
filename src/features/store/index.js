@@ -35,6 +35,9 @@ const useStore = create((set, get) => ({
     ),
   getWords: async () => {
     const words = get().words.length === 0 ? await getWordList() : get().words;
+    if (get().guesses.length !== 5) {
+      return;
+    }
     set((state) => {
       const green = Array(state.guesses.length).fill(null);
       const yellow = [];
@@ -55,6 +58,8 @@ const useStore = create((set, get) => ({
       });
       return {
         words: search(words, green, yellow, grey),
+        history: append(state.guesses, state.history),
+        guesses: [],
       };
     });
   },

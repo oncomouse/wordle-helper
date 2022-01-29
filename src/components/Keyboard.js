@@ -8,7 +8,11 @@ import BackspaceButton from './BackspaceButton';
 const Keyboard = () => {
   const theme = useTheme();
   return (
-    <div>
+    <div
+      css={css`
+        display: block;
+      `}
+    >
       <div>
         <LetterButton letter="q" />
         <LetterButton letter="w" />
