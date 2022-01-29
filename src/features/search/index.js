@@ -1,4 +1,20 @@
-import * as R from 'ramda';
+import {
+  __,
+  count,
+  countBy,
+  equals,
+  forEach,
+  gte,
+  has,
+  identity,
+  intersection,
+  keys,
+  lt,
+  pipe,
+  test as t,
+  where,
+  without,
+} from 'ramda';
 
 const search = (words, green, yellow, grey) => {
   // Search for greens first:
@@ -14,60 +30,49 @@ const search = (words, green, yellow, grey) => {
       })
       .join('')
   );
-  const filteredWords = places.length !== green.length ? words.filter(R.test(wordFilter)) : words;
-  if (yellow.length > 0 || grey.length > 0) {
-    const yellowAndGrey = [];
-    const yellowCount = R.countBy(R.identity, yellow);
-    const greyCount = R.countBy(
-      R.pipe(
-        R.tap((letter) => {
-          if (yellow.indexOf(letter) >= 0) {
-            yellowAndGrey.push(letter);
-          }
-        }),
-        R.identity
-      ),
-      grey
-    );
-    return filteredWords.filter((word) => {
-      const checkWord = word
-        .split('')
-        .filter((x, i) => places.indexOf(i) >= 0)
-        .join('');
-      const wordCount = R.countBy(R.identity, checkWord);
-      const yellowMatch = R.pipe(
-        R.keys,
-        R.without(yellowAndGrey),
-        R.reduce((_, letter) => {
-          const count = wordCount[letter] || 0;
-          if (count < yellowCount[letter]) {
-            return R.reduced(false);
-          }
-          return true;
-        }, true)
-      )(yellowCount);
-      const greyMatch = R.pipe(
-        R.keys,
-        R.without(yellowAndGrey),
-        R.reduce((_, letter) => {
-          const count = wordCount[letter] || 0;
-          if (count >= greyCount[letter]) {
-            return R.reduced(false);
-          }
-          return true;
-        }, true)
-      )(greyCount);
-      const yellowAndGreyMatch = R.reduce((_, letter) => {
-        const count = wordCount[letter] || 0;
-        if (count - yellowCount[letter] > greyCount[letter]) {
-          return R.reduced(false);
-        }
-        return true;
-      }, true)(yellowAndGrey);
-      return yellowMatch && greyMatch && yellowAndGreyMatch;
-    });
+  const filteredWords = places.length !== green.length ? words.filter(t(wordFilter)) : words;
+  if (yellow.length === 0 && grey.length === 0) {
+    return filteredWords;
   }
-  return filteredWords;
+  const yellowAndGrey = intersection(yellow, grey);
+  // Build a test object we can pass to where()
+  const test = {};
+  pipe(
+    without(yellowAndGrey),
+    forEach((letter) => {
+      const yellowCount = count(equals(letter), yellow);
+      test[letter] = gte(__, yellowCount);
+    })
+  )(yellow);
+  pipe(
+    without(yellowAndGrey),
+    forEach((letter) => {
+      const greyCount = count(equals(letter), grey);
+      test[letter] = lt(__, greyCount);
+    })
+  )(grey);
+  forEach((letter) => {
+    const yellowCount = count(equals(letter), yellow);
+    test[letter] = equals(yellowCount);
+  })(yellowAndGrey);
+
+  // Test each word against the test object:
+  return filteredWords.filter((word) => {
+    const checkWord = word
+      .split('')
+      .filter((x, i) => places.indexOf(i) >= 0)
+      .join('');
+    const wordCount = countBy(identity, checkWord);
+    pipe(
+      keys,
+      forEach((letter) => {
+        if (!has(letter, wordCount)) {
+          wordCount[letter] = 0;
+        }
+      })
+    )(test);
+    return where(test, wordCount);
+  });
 };
 
 export default search;

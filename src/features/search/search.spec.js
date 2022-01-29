@@ -41,4 +41,17 @@ describe('Test matching greens', () => {
     expect(search(words, ['e', null, 'e', null, null], [], [])).toStrictEqual(['eleve', 'every']);
   });
 });
-// describe('Test matching a mix of all three', () => {});
+describe('Test matching a mix of all three', () => {
+  test('should return eleve and every when passed e.... and a yellow "e"', () => {
+    expect(search(words, ['e', null, null, null, null], ['e'], [])).toStrictEqual(['eleve', 'every']);
+  });
+  test('should return eleve when passed e.... and 2 yellow "e"', () => {
+    expect(search(words, ['e', null, null, null, null], ['e', 'e'], [])).toStrictEqual(['eleve']);
+  });
+  test('should return elbow when passed e.... and a yellow "w"', () => {
+    expect(search(words, ['e', null, null, null, null], ['w'], [])).toStrictEqual(['elbow']);
+  });
+  test('should return when passed e.e.. and a grey "l"', () => {
+    expect(search(words, ['e', null, 'e', null, null], [], ['l'])).toStrictEqual(['every']);
+  });
+});
