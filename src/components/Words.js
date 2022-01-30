@@ -1,17 +1,17 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from '@emotion/react';
-import PropTypes from 'prop-types';
-import useStore from '../features/store';
+import { jsx } from '@emotion/react'
+import PropTypes from 'prop-types'
+import useStore from '../features/store'
 
 const Words = () => {
-  const words = useStore((state) => state.words);
+  const words = useStore((state) => state.words)
   return (
     <div
       css={{
         display: 'block',
         overflow: 'auto',
-        height: '45em',
+        height: '45em'
       }}
     >
       <ol>
@@ -21,14 +21,15 @@ const Words = () => {
       </ol>
       <Help show={words.length === 0} />
     </div>
-  );
-};
+  )
+}
 
 const Help = (props) => {
-  return props.show ? (
+  return props.show
+    ? (
     <article
       css={{
-        fontSize: '1.25em',
+        fontSize: '1.25em'
       }}
     >
       <h2>What is Wordle Helper?</h2>
@@ -49,10 +50,11 @@ const Help = (props) => {
         on the Wordle puzzle. Eventually, you should get a short list and the solution to your puzzle.
       </p>
     </article>
-  ) : null;
-};
+      )
+    : null
+}
 Help.propTypes = {
-  show: PropTypes.bool.isRequired,
-};
+  show: PropTypes.bool.isRequired
+}
 
-export default Words;
+export default Words

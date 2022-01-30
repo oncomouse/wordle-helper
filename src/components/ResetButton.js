@@ -1,12 +1,12 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { useTheme, jsx } from '@emotion/react';
-import useStore from '../features/store';
-import mq from '../features/mq';
+import { useTheme, jsx } from '@emotion/react'
+import useStore from '../features/store'
+import mq from '../features/mq'
 
 const ResetButton = () => {
-  const resetState = useStore((state) => state.resetState);
-  const theme = useTheme();
+  const resetState = useStore((state) => state.resetState)
+  const theme = useTheme()
   return (
     <button
       css={mq({
@@ -19,13 +19,13 @@ const ResetButton = () => {
         border: `2px solid ${theme.colors.dark.green}`,
         borderRadius: 3,
         color: theme.colors.white,
-        fontWeight: 'bold',
+        fontWeight: 'bold'
       })}
       onClick={() => resetState()}
     >
       New Puzzle
     </button>
-  );
-};
+  )
+}
 
-export default ResetButton;
+export default ResetButton

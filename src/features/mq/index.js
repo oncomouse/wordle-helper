@@ -1,5 +1,5 @@
-import facepaint from 'facepaint';
+import facepaint from 'facepaint'
 
-const mq = facepaint(['@media(min-width: 960px)']);
+const mq = facepaint(['@media(min-width: 960px)'])
 
-export default mq;
+export default mq

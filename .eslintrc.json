@@ -7,7 +7,7 @@
 	"extends": [
 		"eslint:recommended",
 		"plugin:react/recommended",
-		"plugin:prettier/recommended",
+		"standard",
 		"plugin:jest/recommended"
 	],
 	"parserOptions": {
@@ -17,7 +17,7 @@
 		"ecmaVersion": "latest",
 		"sourceType": "module"
 	},
-	"plugins": ["jest", "testing-library", "react-hooks", "react", "prettier"],
+	"plugins": ["jest", "testing-library", "react-hooks", "react"],
 	"rules": {
 		"no-unused-vars": "warn",
 		"react/react-in-jsx-scope": "off",
