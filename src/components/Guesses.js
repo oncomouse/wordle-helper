@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from '@emotion/react';
+import { jsx, useTheme } from '@emotion/react';
 import propTypes from 'prop-types';
 import { always } from 'ramda';
 import useStore from '../features/store';
@@ -25,6 +25,7 @@ const Guesses = () => {
 
 const Guess = (props) => {
   const guess = Array(5).fill(Color.White);
+  const theme = useTheme();
   props.guess.forEach((x, i) => {
     guess[i] = x;
   });
@@ -39,10 +40,10 @@ const Guess = (props) => {
     >
       {guess.map((letter, i) => {
         const color = letter.cata({
-          Grey: always('#86888a'),
-          Green: always('#6aaa64'),
-          Yellow: always('#c9b458'),
-          White: always('#000'),
+          Grey: always('grey'),
+          Green: always('green'),
+          Yellow: always('yellow'),
+          White: always('white'),
         });
         return <GuessLetter key={i} index={i} letter={letter.get()} current={props.current} color={color} />;
       })}
@@ -55,14 +56,16 @@ Guess.propTypes = {
 };
 
 const GuessLetter = (props) => {
+  const theme = useTheme();
   const updateLetterColor = useStore((state) => state.updateLetterColor);
   return (
     <div
       css={mq({
         display: 'grid-item',
-        border: `2px solid ${props.color}`,
-        borderRadius: '3px',
-        color: props.color,
+        border: `2px solid ${theme.colors.dark[props.color]}`,
+        borderRadius: 3,
+        backgroundColor: theme.colors[props.color],
+        color: theme.colors.white,
         fontSize: '2.5em',
         fontWeight: 'bold',
         textAlign: 'center',

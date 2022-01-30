@@ -1,3 +1,9 @@
+import { darken } from 'polished';
+
+const GREY = '#86888a';
+const GREEN = '#6aaa64';
+const YELLOW = '#c9b458';
+const WHITE = '#f1f1f1';
 const theme = {
   button: {
     margin: 0.1,
@@ -6,6 +12,18 @@ const theme = {
     height: 2.75,
     font: {
       size: 1.25,
+    },
+  },
+  colors: {
+    grey: GREY,
+    green: GREEN,
+    yellow: YELLOW,
+    white: WHITE,
+    dark: {
+      grey: darken(0.1, GREY),
+      green: darken(0.1, GREEN),
+      yellow: darken(0.1, YELLOW),
+      white: darken(0.1, WHITE),
     },
   },
 };
