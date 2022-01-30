@@ -2,8 +2,7 @@ import create from 'zustand'
 import { __, adjust, append, dropLast, evolve, identity, ifElse, length, lt, pipe, toLower } from 'ramda'
 import Color from '../../types/Color'
 import search from '../search'
-
-const getWordList = () => fetch('/words.json').then((res) => res.json())
+import getWordList from './getWordList'
 
 const useStore = create((set, get) => ({
   guesses: [],
