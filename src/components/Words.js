@@ -10,7 +10,7 @@ const Words = () => {
       css={css`
         display: block;
         overflow: auto;
-        height: 45rem;
+        height: 45em;
       `}
     >
       <ol>

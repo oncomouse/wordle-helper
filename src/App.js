@@ -1,34 +1,42 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react';
+import { jsx, Global } from '@emotion/react';
 import { ThemeProvider } from '@emotion/react';
 import Guesses from './components/Guesses';
 import Keyboard from './components/Keyboard';
 import Words from './components/Words';
 import ResetButton from './components/ResetButton';
 import theme from './features/theme';
+import mq from './features/mq';
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
+      <Global
+        styles={mq({
+          body: {
+            fontSize: [12, 16],
+          },
+        })}
+      />
       <div
-        css={css`
-          max-width: 960px;
-          margin: auto;
-          display: grid;
-          grid-template-columns: 1.25fr 0.75fr;
-        `}
+        css={mq({
+          maxWidth: 960,
+          margin: 'auto',
+          display: 'grid',
+          gridTemplateColumns: ['1fr', '1.25fr 0.75fr'],
+        })}
       >
         <div
-          css={css`
-            grid-column-start: 1;
-            grid-column-end: 3;
-          `}
+          css={mq({
+            gridColumnStart: 1,
+            gridColumnEnd: [1, 3],
+          })}
         >
           <h1
-            css={css`
-              text-align: center;
-            `}
+            css={{
+              textAlign: 'center',
+            }}
           >
             Wordle Helper
           </h1>
@@ -37,10 +45,10 @@ const App = () => {
           <Guesses />
           <Keyboard />
           <div
-            css={css`
-              text-align: center;
-              margin-top: 2rem;
-            `}
+            css={mq({
+              textAlign: 'center',
+              marginTop: '2em',
+            })}
           >
             <ResetButton />
           </div>

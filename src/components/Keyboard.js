@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx, useTheme } from '@emotion/react';
+import { jsx, useTheme } from '@emotion/react';
 import LetterButton from './LetterButton';
 import EnterButton from './EnterButton';
 import BackspaceButton from './BackspaceButton';
@@ -9,9 +9,9 @@ const Keyboard = () => {
   const theme = useTheme();
   return (
     <div
-      css={css`
-        display: block;
-      `}
+      css={{
+        display: 'block',
+      }}
     >
       <div>
         <LetterButton letter="q" />
@@ -26,9 +26,9 @@ const Keyboard = () => {
         <LetterButton letter="p" />
       </div>
       <div
-        css={css`
-          margin-left: ${theme.button.width / 2}rem;
-        `}
+        css={{
+          marginLeft: [`${theme.button.widthSmall / 2}em`, `${theme.button.width / 2}em`],
+        }}
       >
         <LetterButton letter="a" />
         <LetterButton letter="s" />

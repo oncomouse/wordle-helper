@@ -1,18 +1,19 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react';
+import { jsx } from '@emotion/react';
 import propTypes from 'prop-types';
 import { always } from 'ramda';
 import useStore from '../features/store';
 import Color, { ColorType } from '../types/Color';
+import mq from '../features/mq';
 
 const Guesses = () => {
   const [guesses, history] = useStore((state) => [state.guesses, state.history]);
   return (
     <div
-      css={css`
-        display: block;
-      `}
+      css={mq({
+        display: 'block',
+      })}
     >
       {history.reverse().map((guess, i) => (
         <Guess key={i} guess={guess} />
@@ -29,12 +30,12 @@ const Guess = (props) => {
   });
   return (
     <div
-      css={css`
-        display: grid;
-        grid-gap: 0.25rem;
-        grid-template-columns: repeat(5, 1fr);
-        margin: 0.5rem 8rem;
-      `}
+      css={mq({
+        display: 'grid',
+        gridGap: '0.25em',
+        gridTemplateColumns: 'repeat(5, 1fr)',
+        margin: ['0.5em', '0.5rem 8rem'],
+      })}
     >
       {guess.map((letter, i) => {
         const color = letter.cata({
@@ -57,16 +58,17 @@ const GuessLetter = (props) => {
   const updateLetterColor = useStore((state) => state.updateLetterColor);
   return (
     <div
-      css={css`
-        display: grid-item;
-        border: 2px solid ${props.color};
-        border-radius: 3px;
-        color: ${props.color};
-        font-size: 2.5rem;
-        font-weight: bold;
-        text-align: center;
-        height: 3.25rem;
-      `}
+      css={mq({
+        display: 'grid-item',
+        border: `2px solid ${props.color}`,
+        borderRadius: '3px',
+        color: props.color,
+        fontSize: '2.5em',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        height: '1.5em',
+        padding: '0 0.3em',
+      })}
       onClick={props.current ? () => updateLetterColor(props.index) : null}
     >
       {props.letter}

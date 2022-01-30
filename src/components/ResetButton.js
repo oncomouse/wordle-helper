@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, useTheme, jsx } from '@emotion/react';
+import { useTheme, jsx } from '@emotion/react';
 import useStore from '../features/store';
 
 const ResetButton = () => {
