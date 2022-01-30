@@ -2,7 +2,7 @@
 	"name": "wordle-helper",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://oncomouse.github.io/world-helper",
+	"homepage": "https://oncomouse.github.io/wordle-helper",
 	"dependencies": {
 		"@emotion/react": "^11.7.1",
 		"@testing-library/jest-dom": "^5.16.1",
