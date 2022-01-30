@@ -13,7 +13,6 @@ import {
   lt,
   nthArg,
   pipe,
-  tap,
   test as t,
   unless,
   where,

@@ -25,7 +25,6 @@ const Guesses = () => {
 
 const Guess = (props) => {
   const guess = Array(5).fill(Color.White)
-  const theme = useTheme()
   props.guess.forEach((x, i) => {
     guess[i] = x
   })
