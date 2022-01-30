@@ -3,6 +3,6 @@ import App from './App'
 
 test('renders learn react link', () => {
   render(<App />)
-  const titleElement = screen.getByText(/Wordle Helper/i)
-  expect(titleElement).toBeInTheDocument()
+  const titleElement = screen.getByRole('heading', { level: 1 })
+  expect(titleElement).toHaveTextContent('Wordle Helper')
 })
