@@ -42,7 +42,7 @@ const Help = (props) => {
         As you solve the puzzle, enter the results of your guesses in the word bank in Wordle Helper using the keyboard.
         Click on each letter to set it to yellow, green, or back to grey. You may delete letters by pressing the
         backspace button in the keyboard. When the word you enter looks like the result of your previous guess in
-        Wordle, press the &lquo;Enter&rquo; button.
+        Wordle, press the &ldquo;Enter&rdquo; button.
       </p>
       <p>
         You will see a list of words that could solve the puzzle generated here. Use that list to choose your next guess
