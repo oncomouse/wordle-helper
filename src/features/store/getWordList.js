@@ -1,3 +1,3 @@
-const getWordList = () => fetch('/words.json').then((res) => res.json())
+const getWordList = () => fetch(`${process.env.PUBLIC_URL}/words.json`).then((res) => res.json())
 
 export default getWordList
