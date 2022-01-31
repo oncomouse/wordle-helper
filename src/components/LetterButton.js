@@ -1,25 +1,18 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { useTheme, jsx } from '@emotion/react'
+import { jsx } from '@emotion/react'
 import PropTypes from 'prop-types'
 import useStore from '../features/store'
-import mq from '../features/mq'
+import Button from './Button'
 
 const LetterButton = (props) => {
   const addLetter = useStore((state) => state.addLetter)
-  const theme = useTheme()
   return (
-    <button
-      css={mq({
-        margin: `${theme.button.margin}em`,
-        width: [`${theme.button.widthSmall}em`, `${theme.button.width}em`],
-        fontSize: `${theme.button.font.size}em`,
-        height: `${theme.button.height}em`
-      })}
+    <Button
       onClick={() => addLetter(props.letter)}
     >
       {props.letter}
-    </button>
+    </Button>
   )
 }
 LetterButton.propTypes = {

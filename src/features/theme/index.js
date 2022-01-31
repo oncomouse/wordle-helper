@@ -1,4 +1,4 @@
-import { darken } from 'polished'
+import { darken, lighten } from 'polished'
 
 const GREY = '#86888a'
 const GREEN = '#6aaa64'
@@ -19,6 +19,12 @@ const theme = {
     green: GREEN,
     yellow: YELLOW,
     white: WHITE,
+    light: {
+      grey: lighten(0.4, GREY),
+      green: lighten(0.25, GREEN),
+      yellow: lighten(0.25, YELLOW),
+      white: lighten(0.25, WHITE)
+    },
     dark: {
       grey: darken(0.1, GREY),
       green: darken(0.1, GREEN),
