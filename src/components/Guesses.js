@@ -15,7 +15,7 @@ const Guesses = () => {
         display: 'block'
       })}
     >
-      {history.reverse().map((guess, i) => (
+      {history.map((guess, i) => (
         <Guess key={i} guess={guess} />
       ))}
       <Guess guess={guesses} current={true} />
