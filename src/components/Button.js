@@ -9,10 +9,10 @@ const Button = (props) => {
   return (
     <button
       css={mq({
-        margin: `${theme.button.margin}em`,
-        width: [`${theme.button.widthSmall * props.width}em`, `${theme.button.width * props.width}em`],
+        margin: theme.button.margin,
+        width: [`${theme.button.widthSmall * props.width}rem`, `${theme.button.width * props.width}rem`],
         fontSize: `${theme.button.font.size * props.font}em`,
-        height: `${theme.button.height * props.height}em`,
+        height: `${theme.button.height * props.height}rem`,
         border: `1px solid ${theme.colors[props.color] || props.color}`,
         borderRadius: 3,
         backgroundColor: theme.colors.light[props.color] || props.color,

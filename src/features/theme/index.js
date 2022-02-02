@@ -6,9 +6,9 @@ const YELLOW = '#c9b458'
 const WHITE = '#f1f1f1'
 const theme = {
   button: {
-    margin: 0.1,
+    margin: '0 0.3em 0.4em 0',
     width: 2.75,
-    widthSmall: 1.9,
+    widthSmall: 1.7,
     height: 2.75,
     font: {
       size: 1.25

@@ -7,7 +7,7 @@ import Button from './Button'
 const EnterButton = () => {
   const getWords = useStore((state) => state.getWords)
   return (
-    <Button width={1.5} onClick={() => getWords()}
+    <Button width={1.5} font={0.85} onClick={() => getWords()}
     >
       Enter
     </Button>
