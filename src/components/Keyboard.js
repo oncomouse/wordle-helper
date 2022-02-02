@@ -13,7 +13,7 @@ const Keyboard = () => {
         display: 'block'
       }}
     >
-      <div css={{ marginLeft: '0.3em' }}>
+      <div css={{ marginLeft: '0.25em' }}>
         <LetterButton letter="q" />
         <LetterButton letter="w" />
         <LetterButton letter="e" />
@@ -40,7 +40,7 @@ const Keyboard = () => {
         <LetterButton letter="k" />
         <LetterButton letter="l" />
       </div>
-      <div css={{ marginLeft: '0.3em' }}>
+      <div css={{ marginLeft: '0.25em' }}>
         <EnterButton />
         <LetterButton letter="z" />
         <LetterButton letter="x" />
