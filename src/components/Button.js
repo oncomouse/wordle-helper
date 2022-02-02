@@ -15,7 +15,8 @@ const Button = (props) => {
         height: `${theme.button.height * props.height}em`,
         border: `1px solid ${theme.colors[props.color] || props.color}`,
         borderRadius: 3,
-        backgroundColor: theme.colors.light[props.color] || props.color
+        backgroundColor: theme.colors.light[props.color] || props.color,
+        color: theme.colors.black
       })}
     {...props}
     >
