@@ -7,7 +7,7 @@ import Button from './Button'
 const ResetButton = () => {
   const resetState = useStore((state) => state.resetState)
   return (
-    <Button width={2.5} color="yellow" onClick={() => resetState()}
+    <Button width={2.5} color="yellow" font={0.8} onClick={() => resetState()}
     >
       New Puzzle
     </Button>
