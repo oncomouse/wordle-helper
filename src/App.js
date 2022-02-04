@@ -45,8 +45,8 @@ const App = () => {
           <Keyboard />
           <div
             css={mq({
-              textAlign: 'center',
-              marginTop: '2em'
+              marginTop: '5em',
+              marginLeft: '12rem'
             })}
           >
             <ResetButton />
