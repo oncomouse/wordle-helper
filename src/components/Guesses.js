@@ -34,7 +34,7 @@ const Guess = (props) => {
         display: 'grid',
         gridGap: '0.25em',
         gridTemplateColumns: 'repeat(5, 1fr)',
-        margin: ['0.5em', '0.5rem 8rem']
+        margin: ['0.5em', '0.5rem 11rem 0.5rem 5rem']
       })}
     >
       {guess.map((letter, i) => {
