@@ -39,7 +39,7 @@ const useStore = create((set, get) => ({
     }
     set((state) => {
       const green = Array(state.guesses.length).fill(null)
-      const yellow = []
+      const yellow = Array(state.guesses.length).fill(null)
       const grey = []
       state.guesses.forEach((letter, i) => {
         letter.cata({
@@ -47,7 +47,8 @@ const useStore = create((set, get) => ({
             if (grey.indexOf(x) < 0) grey.push(x)
           },
           Yellow: (x) => {
-            if (yellow.indexOf(x) < 0) yellow.push(x)
+            // if (yellow.indexOf(x) < 0) yellow.push(x)
+            yellow[i] = x
           },
           Green: (x) => {
             green[i] = x
