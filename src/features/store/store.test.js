@@ -75,10 +75,10 @@ describe('Testing Zustand state', () => {
 describe('Test getWords and its ability to make search queries', () => {
   test('It should match with an empty history', async () => {
     fetch.mockResponseOnce(JSON.stringify(words))
-    store.getState().addLetter('e')
     store.getState().addLetter('y')
-    store.getState().addLetter('v')
     store.getState().addLetter('r')
+    store.getState().addLetter('v')
+    store.getState().addLetter('e')
     store.getState().addLetter('n')
     store.getState().updateLetterColor(0)
     store.getState().updateLetterColor(1)

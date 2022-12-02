@@ -55,9 +55,7 @@ const useStore = create((set, get) => ({
     }
     set((state) => {
       const green = Array(state.guesses.length).fill(null)
-      const yellow = Array(state.guesses.length).forEach((x) => {
-        x.push([])
-      })
+      const yellow = Array(state.guesses.length).fill(null).map(() => [])
       const grey = []
       state.guesses.forEach((letter, i) => {
         letter.cata({
@@ -73,7 +71,6 @@ const useStore = create((set, get) => ({
           White: () => {}
         })
       })
-      console.log(yellow)
       return {
         words: search(words, green, yellow, grey),
         history: append(state.guesses, state.history),
