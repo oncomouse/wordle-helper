@@ -12,7 +12,7 @@ import {
 const letterCount = countBy(identity)
 
 const search = (words, green, yellow, grey) => {
-  const shape = { }
+  const shape = {}
   green.forEach((letter) => {
     if (letter === null) return
     shape[letter] = has(letter, shape) ? shape[letter] + 1 : 1

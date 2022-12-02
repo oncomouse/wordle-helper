@@ -8,7 +8,7 @@ import Color, { ColorType } from '../types/Color'
 import mq from '../features/mq'
 
 const Guesses = () => {
-  const [guesses, history] = useStore((state) => [state.guesses, state.history])
+  const [guesses, history] = useStore((state) => [state.guesses, state.history.guesses])
   return (
     <div
       css={mq({
