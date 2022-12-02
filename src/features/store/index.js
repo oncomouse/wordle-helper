@@ -1,5 +1,17 @@
 import create from 'zustand'
-import { __, adjust, append, dropLast, evolve, identity, ifElse, length, lt, pipe, toLower } from 'ramda'
+import {
+  __,
+  adjust,
+  append,
+  dropLast,
+  evolve,
+  identity,
+  ifElse,
+  length,
+  lt,
+  pipe,
+  toLower
+} from 'ramda'
 import Color from '../../types/Color'
 import search from '../search'
 import getWordList from './getWordList'
@@ -17,7 +29,11 @@ const useStore = create((set, get) => ({
   addLetter: (x) =>
     set(
       evolve({
-        guesses: ifElse(pipe(length, lt(__, 5)), append(Color.new(toLower(x))), identity)
+        guesses: ifElse(
+          pipe(length, lt(__, 5)),
+          append(Color.new(toLower(x))),
+          identity
+        )
       })
     ),
   deleteLetter: () =>
@@ -39,7 +55,9 @@ const useStore = create((set, get) => ({
     }
     set((state) => {
       const green = Array(state.guesses.length).fill(null)
-      const yellow = []
+      const yellow = Array(state.guesses.length).forEach((x) => {
+        x.push([])
+      })
       const grey = []
       state.guesses.forEach((letter, i) => {
         letter.cata({
@@ -47,7 +65,7 @@ const useStore = create((set, get) => ({
             if (grey.indexOf(x) < 0) grey.push(x)
           },
           Yellow: (x) => {
-            if (yellow.indexOf(x) < 0) yellow.push(x)
+            if (yellow[i].indexOf(x) < 0) yellow[i].push(x)
           },
           Green: (x) => {
             green[i] = x
@@ -55,6 +73,7 @@ const useStore = create((set, get) => ({
           White: () => {}
         })
       })
+      console.log(yellow)
       return {
         words: search(words, green, yellow, grey),
         history: append(state.guesses, state.history),
