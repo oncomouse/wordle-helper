@@ -18,7 +18,9 @@ import {
 const search = (words, guesses) => {
   const shape = {}
   const grey = []
-  const yellow = Array(5).fill(null).map(() => [])
+  const yellow = Array(5)
+    .fill(null)
+    .map(() => [])
   const green = Array(5).fill(null)
 
   guesses.forEach((guess) => {
@@ -40,11 +42,15 @@ const search = (words, guesses) => {
           if (!has(letter, yellow[i])) {
             yellow[i].push(letter)
           }
-          currentWord[letter] = has(letter, currentWord) ? currentWord[letter] + 1 : 1
+          currentWord[letter] = has(letter, currentWord)
+            ? currentWord[letter] + 1
+            : 1
         },
         Green: (letter) => {
           green[i] = letter
-          currentWord[letter] = has(letter, currentWord) ? currentWord[letter] + 1 : 1
+          currentWord[letter] = has(letter, currentWord)
+            ? currentWord[letter] + 1
+            : 1
         },
         White: () => {}
       })
@@ -73,21 +79,20 @@ const search = (words, guesses) => {
   })(shape)
   const greyFilter = grey.join('')
   const wordFilter = RegExp(
-    green.map((x, i) => {
-      if (typeof x === 'string') {
-        return x
-      }
-      if (yellow[i].length + grey.length === 0) {
-        return '.'
-      }
-      return `[^${yellow[i].join('')}${greyFilter}]`
-    }).join('')
+    green
+      .map((x, i) => {
+        if (typeof x === 'string') {
+          return x
+        }
+        if (yellow[i].length + grey.length === 0) {
+          return '.'
+        }
+        return `[^${yellow[i].join('')}${greyFilter}]`
+      })
+      .join('')
   )
   return pipe(
-    filter(pipe(
-      countBy(identity),
-      where(shapeFilter)
-    )),
+    filter(pipe(countBy(identity), where(shapeFilter))),
     filter(t(wordFilter))
   )(words)
 }

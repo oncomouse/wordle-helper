@@ -21,7 +21,9 @@ const NUMBER_OF_LETTERS_PER_WORD = 5
 const makeHistory = () => ({
   guesses: [],
   green: Array(NUMBER_OF_LETTERS_PER_WORD).fill(null),
-  yellow: Array(NUMBER_OF_LETTERS_PER_WORD).fill(null).map(() => []),
+  yellow: Array(NUMBER_OF_LETTERS_PER_WORD)
+    .fill(null)
+    .map(() => []),
   grey: []
 })
 
