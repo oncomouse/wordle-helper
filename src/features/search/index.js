@@ -1,16 +1,19 @@
 import {
   __,
   countBy,
+  either,
   equals,
+  filter,
   forEachObjIndexed,
   gte,
   has,
   identity,
+  isNil,
+  mapObjIndexed,
+  pipe,
   test as t,
   where
 } from 'ramda'
-
-const letterCount = countBy(identity)
 
 const search = (words, guesses) => {
   const shape = {}
@@ -45,6 +48,7 @@ const search = (words, guesses) => {
         },
         White: () => {}
       })
+      // Update shape based on currentWord's count of yellows & greens
       forEachObjIndexed((count, letter) => {
         if (has(shape, letter) && count > shape[letter]) {
           shape[letter] = count
@@ -54,18 +58,19 @@ const search = (words, guesses) => {
       }, currentWord)
     })
   })
-  Object.keys(shape).forEach((letter) => {
-    if (shape[letter] === 0) {
-      shape[letter] = x => x === 0 || typeof x === 'undefined'
+
+  // Turn shape (which is a set of counts) into a filter object we can pass to R.where
+  const shapeFilter = mapObjIndexed((count, letter) => {
+    if (count === 0) {
+      return either(equals(0), isNil)
     } else {
       if (grey.indexOf(letter) < 0) {
-        shape[letter] = gte(__, shape[letter])
+        return gte(__, count)
       } else {
-        shape[letter] = equals(shape[letter])
+        return equals(count)
       }
     }
-  })
-  const rightShaped = words.filter((x) => where(shape, letterCount(x)))
+  })(shape)
   const greyFilter = grey.join('')
   const wordFilter = RegExp(
     green.map((x, i) => {
@@ -78,8 +83,13 @@ const search = (words, guesses) => {
       return `[^${yellow[i].join('')}${greyFilter}]`
     }).join('')
   )
-  const output = rightShaped.filter(t(wordFilter))
-  return output
+  return pipe(
+    filter(pipe(
+      countBy(identity),
+      where(shapeFilter)
+    )),
+    filter(t(wordFilter))
+  )(words)
 }
 
 export default search
