@@ -2,6 +2,7 @@ import {
   __,
   countBy,
   equals,
+  forEachObjIndexed,
   gte,
   has,
   identity,
@@ -11,22 +12,47 @@ import {
 
 const letterCount = countBy(identity)
 
-const search = (words, green, yellow, grey) => {
+const search = (words, guesses) => {
   const shape = {}
-  green.forEach((letter) => {
-    if (letter === null) return
-    shape[letter] = has(letter, shape) ? shape[letter] + 1 : 1
-  })
-  yellow.forEach((place) =>
-    place.forEach((letter) => {
-      if (letter === null) return
-      shape[letter] = has(letter, shape) ? shape[letter] + 1 : 1
+  const grey = []
+  const yellow = Array(5).fill(null).map(() => [])
+  const green = Array(5).fill(null)
+
+  guesses.forEach((guess) => {
+    const currentWord = {}
+    guess.forEach((l, i) => {
+      l.cata({
+        Grey: (letter) => {
+          if (!has(letter, shape)) {
+            shape[letter] = 0
+          }
+          if (!has(letter, grey)) {
+            grey.push(letter)
+          }
+        },
+        Yellow: (letter) => {
+          if (typeof yellow[i] === 'undefined') {
+            yellow[i] = []
+          }
+          if (!has(letter, yellow[i])) {
+            yellow[i].push(letter)
+          }
+          currentWord[letter] = has(letter, currentWord) ? currentWord[letter] + 1 : 1
+        },
+        Green: (letter) => {
+          green[i] = letter
+          currentWord[letter] = has(letter, currentWord) ? currentWord[letter] + 1 : 1
+        },
+        White: () => {}
+      })
+      forEachObjIndexed((count, letter) => {
+        if (has(shape, letter) && count > shape[letter]) {
+          shape[letter] = count
+        } else {
+          shape[letter] = count
+        }
+      }, currentWord)
     })
-  )
-  grey.forEach((letter) => {
-    if (!has(letter, shape)) {
-      shape[letter] = 0
-    }
   })
   Object.keys(shape).forEach((letter) => {
     if (shape[letter] === 0) {

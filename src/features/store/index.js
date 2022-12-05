@@ -65,22 +65,8 @@ const useStore = create((set, get) => ({
     set((state) => {
       const updatedHistory = { ...get().history }
       updatedHistory.guesses.push(state.guesses)
-      state.guesses.forEach((letter, i) => {
-        letter.cata({
-          Grey: (x) => {
-            if (updatedHistory.grey.indexOf(x) < 0) updatedHistory.grey.push(x)
-          },
-          Yellow: (x) => {
-            if (updatedHistory.yellow[i].indexOf(x) < 0) updatedHistory.yellow[i].push(x)
-          },
-          Green: (x) => {
-            updatedHistory.green[i] = x
-          },
-          White: () => {}
-        })
-      })
       return {
-        words: search(words, updatedHistory.green, updatedHistory.yellow, updatedHistory.grey),
+        words: search(words, updatedHistory.guesses),
         history: updatedHistory,
         guesses: []
       }
