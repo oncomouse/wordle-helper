@@ -18,20 +18,11 @@ import getWordList from './getWordList'
 
 const NUMBER_OF_LETTERS_PER_WORD = 5
 
-const makeHistory = () => ({
-  guesses: [],
-  green: Array(NUMBER_OF_LETTERS_PER_WORD).fill(null),
-  yellow: Array(NUMBER_OF_LETTERS_PER_WORD)
-    .fill(null)
-    .map(() => []),
-  grey: []
-})
-
 const useStore = create((set, get) => ({
   guesses: [],
-  history: makeHistory(),
+  history: [],
   words: [],
-  resetState: () => set({ guesses: [], history: makeHistory(), words: [] }),
+  resetState: () => set({ guesses: [], history: [], words: [] }),
   newGuess: () =>
     set((state) => ({
       history: append(state.guesses, state.history),
@@ -65,10 +56,9 @@ const useStore = create((set, get) => ({
       return
     }
     set((state) => {
-      const updatedHistory = { ...get().history }
-      updatedHistory.guesses.push(state.guesses)
+      const updatedHistory = [...get().history, state.guesses]
       return {
-        words: search(words, updatedHistory.guesses),
+        words: search(words, updatedHistory),
         history: updatedHistory,
         guesses: []
       }
