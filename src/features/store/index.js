@@ -56,7 +56,7 @@ const useStore = create((set, get) => ({
       return
     }
     set((state) => {
-      const updatedHistory = [...state.history, state.guesses]
+      const updatedHistory = append(state.guesses, state.history)
       return {
         words: search(words, updatedHistory),
         history: updatedHistory,
