@@ -12,11 +12,10 @@ describe('Testing Zustand state', () => {
   test('It should reset the state with resetState()', () => {
     store.getState().guesses.push('a')
     store.getState().guesses.push('b')
-    store.getState().history.grey.push('a')
-    store.getState().history.grey.push('b')
+    store.getState().history.push([Color.Green('a'), Color.Grey('b'), Color.Yellow('c'), Color.Grey('r'), Color.Grey('s')])
     store.getState().resetState()
     expect(store.getState().guesses).toEqual([])
-    expect(store.getState().history.grey).toEqual([])
+    expect(store.getState().history).toEqual([])
   })
   test('It should update color with updateLetterColor()', () => {
     store.getState().guesses = [Color.Green('a'), Color.Grey('b'), Color.Yellow('c')]
