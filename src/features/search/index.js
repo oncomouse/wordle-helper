@@ -4,6 +4,7 @@ import {
   either,
   equals,
   filter,
+  flatten,
   forEachObjIndexed,
   gte,
   has,
@@ -32,7 +33,11 @@ const search = (words, guesses) => {
             shape[letter] = 0
           }
           if (!has(letter, grey)) {
-            grey.push(letter)
+            if (flatten(yellow).filter(equals(letter)).length > 0) {
+              yellow[i].push(letter)
+            } else {
+              grey.push(letter)
+            }
           }
         },
         Yellow: (letter) => {
